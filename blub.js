@@ -15,11 +15,21 @@ function connect(){
     })
     .then(server => {
         var serviceCode = prompt("Enter the serivce you would like to connet too: ");
+        
+        if(serviceCode == null){
+            serviceCode = 0xFE0F;
+        }
+        
         console.log("Getting primary service " + serviceCode);
         return server.getPrimaryService(serviceCode);
     })
     .then(service => {
         var characteristicCode = prompt("Enter the characteristic you would like to connect too: ");
+        
+        if(characteristicCode == null){
+            characteristicCode = 0x932C32BD000747A2835AA8D455B859DD;
+        }
+        
         console.log("Getting characteristic " + characteristicCode);
         return service.getCharacteristic(characteristicCode);
     })
