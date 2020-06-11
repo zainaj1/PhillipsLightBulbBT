@@ -23,13 +23,13 @@ function connect(){
     .then(server => {
         // Access light turning on/off service
         // console.log("Getting primary service " + serv);
-        return server.getPrimaryService();
+        return server.getPrimaryServices();
     })
     .then(services => {
         console.log(services)
         // Get characteristic to communicate with
         // console.log("Getting characteristic " + charc);
-        return service.getCharacteristic(charc);
+        return services.getCharacteristics(charc);
     })
     .catch(error => {console.log(error); });
 }
