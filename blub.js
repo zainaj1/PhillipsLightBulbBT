@@ -21,66 +21,30 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        // Note that we could also get all services that match a specific UUID by
-        // passing it to getPrimaryServices().
-        console.log('Getting Services...');
-        return server.getPrimaryServices();
-        })
-        .then(services => {
-        log('Getting Characteristics...');
-        let queue = Promise.resolve();
-        services.forEach(service => {
-            queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
-            console.log('> Service: ' + service.uuid);
-            characteristics.forEach(characteristic => {
-                console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
-                    getSupportedProperties(characteristic));
-            });
-            }));
-        });
-        return queue;
-        })
-        .catch(error => {
-        console.log('Argh! ' + error);
-        });
-    }
-    
-/* Utils */
-    
-function getSupportedProperties(characteristic) {
-    let supportedProperties = [];
-    for (const p in characteristic.properties) {
-    if (characteristic.properties[p] === true) {
-        supportedProperties.push(p.toUpperCase());
-    }
-    }
-    return '[' + supportedProperties.join(', ') + ']';
+        // Access light turning on/off service
+        // console.log("Getting primary service " + serv);
+        return server.getPrimaryService();
+    })
+    .then(services => {
+        console.log(services)
+        // Get characteristic to communicate with
+        // console.log("Getting characteristic " + charc);
+        return service.getCharacteristic(charc);
+    })
+    .catch(error => {console.log(error); });
 }
 
-//     .then(server => {
-//         // Access light turning on/off service
-//         console.log("Getting primary service " + serv);
-//         return server.getPrimaryService(serv);
-//     })
-//     .then(service => {
-//         // Get characteristic to communicate with
-//         console.log("Getting characteristic " + charc);
-//         return service.getCharacteristic(charc);
-//     })
-//     .catch(error => {console.log(error); });
-// }
+// User input for serivce
+function setService(){
+    serv = Number(document.getElementById("service").value);
+    console.log("service set to: "+serv.toString(16));
+}
 
-// // User input for serivce
-// function setService(){
-//     serv = Number(document.getElementById("service").value);
-//     console.log("service set to: "+serv.toString(16));
-// }
-
-// // User input for characteristic
-// function setCharacteristic(){
-//     charc = Number(document.getElementById("Characteristic").value);
-//     console.log("characteristic set to: "+charc.toString(16));
-// }
+// User input for characteristic
+function setCharacteristic(){
+    charc = Number(document.getElementById("Characteristic").value);
+    console.log("characteristic set to: "+charc.toString(16));
+}
 
 
 // Light functions
