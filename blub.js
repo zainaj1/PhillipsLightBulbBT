@@ -22,20 +22,22 @@ function connect(){
     })
     .then(server => {
         // Access light turning on/off service
-        console.log("Getting primary service " + serv);
+        console.log("Getting primary service " + serv.toString(16));
         return server.getPrimaryService(serv);
     })
     .then(services => {
-        console.log(services)
+        // console.log(services)
         // Get characteristic to communicate with
-        console.log("Getting characteristic " + charc);
-        // for (service in services){
-        //     console.log(serive.uuid);
-        // }
-        return services.getCharacteristics(charc);
+        console.log("Getting characteristic " + charc.toString(16));
+        return services.getCharacteristic(charc);
         
     })
-    .catch(error => {console.log(error); });
+    .then(characteristic => {
+        console.log("sent command");
+        var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
+        return characteristic.writeValue(data);
+    })
+    .catch(error => {console.log("Something when wrong: " + error); });
 }
 
 // User input for serivce
