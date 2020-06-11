@@ -12,8 +12,11 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        console.log("thing connected");
-        /* ... */
+        console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
+        return ServiceUIFrameContext.getCharacteristic(0x932c32BD-0007-47A2-835A-A8D455B859DD);
+    })
+    .then(characteristic => {
+        console.log("All ready");
     })
     .catch(error => {console.log(error); });
 }
