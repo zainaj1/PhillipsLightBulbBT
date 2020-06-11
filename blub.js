@@ -3,13 +3,9 @@
 
 
 // Initalize variables:
-<<<<<<< HEAD
 var serv = '932c32bd-0002-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0007-47a2-835a-a8d455b859dd';
-=======
-var serv = '0x932C32BD-0000-47A2-835A-A8D455B59DD';
-var charc = '0x932C32BD-0007-47A2-835A-A8D455B859DD';
->>>>>>> 43eb301987eaaec327f809bed2ec335655df4f60
+
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
 
 
@@ -29,13 +25,13 @@ function connect(){
     .then(server => {
         // Access light turning on/off service
         console.log("Getting primary service " + serv.toString(16));
-        return server.getPrimaryService('932C32BD-0000-47A2-835A-A8D455B59DD');
+        return server.getPrimaryService(serv);
     })
     .then(service => {
         console.log("Acceced: "+service.uuid);
         // Get characteristic to communicate with
         console.log("Getting characteristic " + charc.toString(16));
-        return service.getCharacteristic('932C32BD-0007-47A2-835A-A8D455B859DD');
+        return service.getCharacteristic(charc);
         
     })
     .then(characteristic => {
