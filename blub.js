@@ -42,7 +42,7 @@ function setService(){
 // User input for characteristic
 function setCharacteristic(){
     charc = parseInt(document.getElementById("Characteristic").value, 16);
-    console.log("characteristic set to: "+charcserv.toString(16));
+    console.log("characteristic set to: "+charc.toString(16));
 }
 
 
