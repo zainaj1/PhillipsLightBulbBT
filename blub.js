@@ -4,7 +4,7 @@ function connect(){
     navigator.bluetooth.requestDevice({
         filters:[{
             services: [0xFE0F]
-        }]
+        .}]
     })
     .then(device => { 
         // Get name of device
@@ -20,7 +20,7 @@ function connect(){
     .then(service => {
         console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
         
-        return service.getCharacteristic(0x932c32BD);
+        return service.getCharacteristic(0x932c32BD000747A2835AA8D455B859DD);
     })
     .catch(error => {console.log(error); });
 }
