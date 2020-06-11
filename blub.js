@@ -24,13 +24,13 @@ function connect(){
     .then(server => {
         // Access light turning on/off service
         console.log("Getting primary service " + serv.toString(16));
-        return server.getPrimaryService("0x932C32BD-0000-47A2-835A-A8D455B59DD");
+        return server.getPrimaryService('932C32BD-0000-47A2-835A-A8D455B59DD');
     })
     .then(service => {
         console.log("Acceced: "+service.uuid);
         // Get characteristic to communicate with
         console.log("Getting characteristic " + charc.toString(16));
-        return service.getCharacteristic("0x932C32BD-0007-47A2-835A-A8D455B859DD");
+        return service.getCharacteristic('932C32BD-0007-47A2-835A-A8D455B859DD');
         
     })
     .then(characteristic => {
