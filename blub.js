@@ -22,14 +22,18 @@ function connect(){
     })
     .then(server => {
         // Access light turning on/off service
-        // console.log("Getting primary service " + serv);
-        return server.getPrimaryServices();
+        console.log("Getting primary service " + serv);
+        return server.getPrimaryService(serv);
     })
     .then(services => {
         console.log(services)
         // Get characteristic to communicate with
-        // console.log("Getting characteristic " + charc);
+        console.log("Getting characteristic " + charc);
+        // for (service in services){
+        //     console.log(serive.uuid);
+        // }
         return services.getCharacteristics(charc);
+        
     })
     .catch(error => {console.log(error); });
 }
