@@ -2,7 +2,9 @@
 // TODO: Add a filter just for the bulbs
 function connect(){
     navigator.bluetooth.requestDevice({
-        acceptAllDevices: true
+        filters:[{
+            services: [0xFE0F]
+        }]
     })
     .then(device => { 
         // Get name of device
@@ -12,11 +14,13 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
-        return ServiceUIFrameContext.getCharacteristic(0x932c32BD);
+        console.log("Getting primary service 0xFE0F");
+        return server.getPrimaryService(0xFE0F);
     })
-    .then(characteristic => {
-        console.log("All ready");
+    .then(service => {
+        console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
+        
+        return service.getCharacteristic(0x932c32BD);
     })
     .catch(error => {console.log(error); });
 }
