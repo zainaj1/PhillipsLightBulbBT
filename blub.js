@@ -1,15 +1,10 @@
 // this tries to find all devices
 // TODO: Add a filter just for the bulbs
-var acceptAll = false;
-
-function toggleAccept(){
-    acceptAll = !acceptAll;
-    prompt("User has set accept all to" + acceptAll);
-}
-
 function connect(){
+
+
     navigator.bluetooth.requestDevice({
-        acceptAllDevices: acceptAll,
+        acceptAllDevices: document.getElementById("acceptAll"),
         filters:[{services: [0xFE0F]}]
     })
     .then(device => { 
