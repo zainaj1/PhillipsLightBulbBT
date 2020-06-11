@@ -3,8 +3,8 @@
 
 
 // Initalize variables:
-var serv = '932C32BD-0000-47A2-835A-A8D455B59DD';
-var charc = '932C32BD-0007-47A2-835A-A8D455B859DD';
+var serv = '932c32bd-0002-47a2-835a-a8d455b859dd';
+var charc = '932c32bd-0007-47a2-835a-a8d455b859dd';
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
 
 
@@ -38,7 +38,7 @@ function connect(){
         var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
         return characteristic.writeValue(data);
     })
-    .catch(error => {console.log("Something when wrong: " + error); });
+    .catch(error => {console.log("Something whent wrong: " + error); });
 }
 
 
