@@ -23,7 +23,7 @@ function connect(){
     .then(server => {
         // Access light turning on/off service
         console.log("Getting primary service " + serv.toString(16));
-        return server.getPrimaryService(serv);
+        return server.getPrimaryServices();
     })
     .then(services => {
         // console.log(services)
