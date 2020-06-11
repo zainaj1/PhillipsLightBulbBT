@@ -2,7 +2,7 @@
 // TODO: Add a filter just for the bulbs
 var acceptAll = false;
 
-function acceptAll(){
+function toggleAccept(){
     acceptAll = !acceptAll;
     prompt("User has set accept all to" + acceptAll);
 }
