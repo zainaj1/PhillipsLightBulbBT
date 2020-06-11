@@ -1,11 +1,17 @@
 // this tries to find all devices
 // TODO: Add a filter just for the bulbs
+
+
+// Initalize variables:
+var serv = 0xFE0F;
+var charc = 0x932C32BD000747A2835AA8D455B859DD;
+
+
 function connect(){
-
-
     navigator.bluetooth.requestDevice({
-        acceptAllDevices: document.getElementById("acceptAll"),
-        filters:[{services: [0xFE0F]}]
+        // filters:[{services: [0xFE0F]}]
+        acceptAllDevices: true,
+        optionalServices: [0xFE0f]
     })
     .then(device => { 
         // Get name of device
@@ -15,24 +21,35 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        var serviceCode = parseInt(prompt("Enter the serivce you would like to connet too: "), 16);
-        
-        if(serviceCode == null){
-            serviceCode = 0xFE0F;
-        }
-        
-        console.log("Getting primary service " + serviceCode);
-        return server.getPrimaryService(serviceCode);
+        // Access light turning on/off service
+        console.log("Getting primary service " + serv);
+        return server.getPrimaryService(serv);
     })
     .then(service => {
-        var characteristicCode = parseInt(prompt("Enter the characteristic you would like to connect too: "), 16);
-        
-        if(characteristicCode == null){
-            characteristicCode = 0x932C32BD000747A2835AA8D455B859DD;
-        }
-        
-        console.log("Getting characteristic " + characteristicCode);
-        return service.getCharacteristic(characteristicCode);
+        // Get characteristic to communicate with
+        console.log("Getting characteristic " + charc);
+        return service.getCharacteristic(charc);
     })
     .catch(error => {console.log(error); });
+}
+
+// User input for serivce
+function setService(){
+    serv = parseInt(document.getElementById("service").value, 16);
+    console.log("service set to: "+serv.toString(16));
+}
+
+// User input for characteristic
+function setCharacteristic(){
+    charc = parseInt(document.getElementById("Characteristic").value, 16);
+    console.log("characteristic set to: "+charcserv.toString(16));
+}
+
+
+// Light functions
+function turnOn(){
+    console.log("Not initalized");
+}
+function turnOff(){
+    console.log("Not initalized")
 }

@@ -5,20 +5,25 @@
 
     <meta name="viewport" content="width=device-width", initial-scale=1.0">
 </head>
-<body>
-                                                                          
+<body>                                                         
     <div class="top">
-        <h2> Press to search for devices</h2>
-        Connect All: <input type="checkbox" id="acceptAll">
-        <button onclick="connect()"> Press to Connect </button>
+        <h1> Parameters for Bluetooth</h1>
+
+        Serivce: <input type="text" id="service"> 
+        <button onclick="setService()"> set </button> <br>
+
+        Characteristic: <input type="text" id="Characteristic">
+        <button onclick="setCharacteristic()"> set </button> 
     </div>
     <div class="mid">
-        <h2> Press to turn on</h2>
-        <button onclick="turnon()"> On </button>
-        <h2> Press to turn off</h2>
-        <button onclick="turnoff()"> Off </button>
+        <h1> Start Connection</h1>
+        <button onclick="connect()"> Press to Connect </button>
     </div>
     <div class="bottom">
+        <h1> Functions to Control Lights</h1>
+
+        <button onclick="turnon()"> On </button>
+        <button onclick="turnoff()"> Off </button>
     </div>
     <script src="blub.js"></script>
     
