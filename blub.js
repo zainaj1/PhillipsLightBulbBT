@@ -3,7 +3,7 @@
 function connect(){
     navigator.bluetooth.requestDevice({
         filters:[{
-            services: [FE0F]
+            services: [0xFE0F]
         }]
     })
     .then(device => { 
