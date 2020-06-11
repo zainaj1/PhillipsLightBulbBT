@@ -23,7 +23,7 @@ function connect(){
     .then(server => {
         // Note that we could also get all services that match a specific UUID by
         // passing it to getPrimaryServices().
-        log('Getting Services...');
+        console.log('Getting Services...');
         return server.getPrimaryServices();
         })
         .then(services => {
@@ -31,9 +31,9 @@ function connect(){
         let queue = Promise.resolve();
         services.forEach(service => {
             queue = queue.then(_ => service.getCharacteristics().then(characteristics => {
-            log('> Service: ' + service.uuid);
+            console.log('> Service: ' + service.uuid);
             characteristics.forEach(characteristic => {
-                log('>> Characteristic: ' + characteristic.uuid + ' ' +
+                console.log('>> Characteristic: ' + characteristic.uuid + ' ' +
                     getSupportedProperties(characteristic));
             });
             }));
@@ -41,7 +41,7 @@ function connect(){
         return queue;
         })
         .catch(error => {
-        log('Argh! ' + error);
+        console.log('Argh! ' + error);
         });
     }
     
