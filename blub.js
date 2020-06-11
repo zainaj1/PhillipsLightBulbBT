@@ -9,7 +9,7 @@ function connect(){
         console.log(device.name);
     
         // Connect to remote GATT Server
-        return device.gatt.connet();
+        return device.gatt.connect();
     })
     .then(server => {
         /* ... */
