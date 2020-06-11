@@ -3,7 +3,7 @@
 function connect(){
     navigator.bluetooth.requestDevice({
         filters:[{
-            services: [0xFE0F]
+            services: [0x02ffff1002]
         }]
     })
     .then(device => { 
@@ -15,12 +15,11 @@ function connect(){
     })
     .then(server => {
         console.log("Getting primary service 0xFE0F");
-        return server.getPrimaryService(0xFE0F);
+        return server.getPrimaryService(0x02ffff1002);
     })
     .then(service => {
-        console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
-        
-        return service.getCharacteristic(0x932c32BD000747A2835AA8D455B859DD);
+        console.log("Getting Service 0x932c32BD...");
+        return service.getCharacteristic(0x932C32BD000747A2835AA8D455B859DD);
     })
     .catch(error => {console.log(error); });
 }
