@@ -25,11 +25,11 @@ function connect(){
         console.log("Getting primary service " + serv.toString(16));
         return server.getPrimaryServices();
     })
-    .then(services => {
+    .then(service => {
         // console.log(services)
         // Get characteristic to communicate with
         
-        for(s in services){
+        for(s in service){
             console.log(s.uuid);
         }
 
