@@ -3,7 +3,7 @@
 
 
 // Initalize variables:
-var serv = '932c32bd-0002-47a2-835a-a8d455b859dd';
+var serv = '932c32bd-0000-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0007-47a2-835a-a8d455b859dd';
 
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
