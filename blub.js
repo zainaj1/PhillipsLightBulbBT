@@ -14,12 +14,14 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        console.log("Getting primary service 0xFE0F");
-        return server.getPrimaryService(0x02ffff1002);
+        var serviceCode = window.prompt("Enter the serivce you would like to connet too: ");
+        console.log("Getting primary service " + serviceCode);
+        return server.getPrimaryService(serviceCode);
     })
     .then(service => {
-        console.log("Getting Service 0x932c32BD...");
-        return service.getCharacteristic(0x932C32BD000747A2835AA8D455B859DD);
+        var characteristicCode = window.prompt("Enter the characteristic you would like to connect too: ");
+        console.log("Getting characteristic " + characteristicCode);
+        return service.getCharacteristic(characteristicCode);
     })
     .catch(error => {console.log(error); });
 }
