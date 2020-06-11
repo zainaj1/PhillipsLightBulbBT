@@ -28,6 +28,11 @@ function connect(){
     .then(services => {
         // console.log(services)
         // Get characteristic to communicate with
+        
+        for(s in services){
+            console.log(s.uuid);
+        }
+
         console.log("Getting characteristic " + charc.toString(16));
         return services.getCharacteristic(charc);
         
@@ -40,12 +45,12 @@ function connect(){
     .catch(error => {console.log("Something when wrong: " + error); });
 }
 
+
 // User input for serivce
 function setService(){
     serv = Number(document.getElementById("service").value);
     console.log("service set to: "+serv.toString(16));
 }
-
 // User input for characteristic
 function setCharacteristic(){
     charc = Number(document.getElementById("Characteristic").value);
