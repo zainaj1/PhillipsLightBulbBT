@@ -3,15 +3,15 @@
 
 
 // Initalize variables:
-var serv = 0xFE0F;
-var charc = 0x932C32BD000747A2835AA8D455B859DD;
+var serv = "FE0F";
+var charc = "932C32BD000747A2835AA8D455B859DD";
 
 
 function connect(){
     navigator.bluetooth.requestDevice({
-        // filters:[{services: [0xFE0F]}]
-        acceptAllDevices: true,
-        optionalServices: [0xFE0f]
+        filters:[{services: [0xFE0F]}]
+        // acceptAllDevices: true,
+        // optionalServices: [0xFE0f]
     })
     .then(device => { 
         // Get name of device
@@ -23,12 +23,12 @@ function connect(){
     .then(server => {
         // Access light turning on/off service
         // console.log("Getting primary service " + serv.toString(16));
-        return server.getPrimaryService();
+        return server.getPrimaryService(serv);
     })
     .then(service => {
-        console.log("Acceced: "+services.uuid);
+        console.log("Acceced: "+service.uuid);
         // Get characteristic to communicate with
-        console.log("Getting characteristic " + charc.toString(16));
+        // console.log("Getting characteristic " + charc.toString(16));
         return services.getCharacteristic(charc);
         
     })
