@@ -12,6 +12,7 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
+        console.log("thing connected");
         /* ... */
     })
     .catch(error => {console.log(error); });
