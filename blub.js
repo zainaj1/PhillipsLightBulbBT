@@ -14,12 +14,12 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        var serviceCode = window.prompt("Enter the serivce you would like to connet too: ");
+        var serviceCode = prompt("Enter the serivce you would like to connet too: ");
         console.log("Getting primary service " + serviceCode);
         return server.getPrimaryService(serviceCode);
     })
     .then(service => {
-        var characteristicCode = window.prompt("Enter the characteristic you would like to connect too: ");
+        var characteristicCode = prompt("Enter the characteristic you would like to connect too: ");
         console.log("Getting characteristic " + characteristicCode);
         return service.getCharacteristic(characteristicCode);
     })
