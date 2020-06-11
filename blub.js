@@ -8,15 +8,11 @@ function acceptAll(){
 }
 
 function connect(){
-    
-    if(acceptAll){
     navigator.bluetooth.requestDevice({
+        acceptAllDevices: acceptAll,
         filters:[{
             services: [0xFE0F]
         }]
-    }else{
-         acceptAllDevices: true;                            
-         }
     })
     .then(device => { 
         // Get name of device
