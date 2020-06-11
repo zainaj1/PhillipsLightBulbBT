@@ -4,15 +4,13 @@ var acceptAll = false;
 
 function acceptAll(){
     acceptAll = !acceptAll;
-    alert("User has set accept all to" + acceptAll);
+    prompt("User has set accept all to" + acceptAll);
 }
 
 function connect(){
     navigator.bluetooth.requestDevice({
         acceptAllDevices: acceptAll,
-        filters:[{
-            services: [0xFE0F]
-        }]
+        filters:[{services: [0xFE0F]}]
     })
     .then(device => { 
         // Get name of device
