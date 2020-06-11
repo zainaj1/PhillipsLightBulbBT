@@ -3,7 +3,7 @@
 
 
 // Initalize variables:
-var serv = "FE0F";
+var serv = "932C32BD-0000-47A2-835A-A8D455B59DD";
 var charc = "932C32BD-0007-47A2-835A-A8D455B859DD"
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
 
@@ -23,13 +23,13 @@ function connect(){
     })
     .then(server => {
         // Access light turning on/off service
-        // console.log("Getting primary service " + serv.toString(16));
+        console.log("Getting primary service " + serv.toString(16));
         return server.getPrimaryService(serv);
     })
     .then(service => {
         console.log("Acceced: "+service.uuid);
         // Get characteristic to communicate with
-        // console.log("Getting characteristic " + charc.toString(16));
+        console.log("Getting characteristic " + charc.toString(16));
         return service.getCharacteristic(charc);
         
     })
@@ -44,12 +44,12 @@ function connect(){
 
 // User input for serivce
 function setService(){
-    serv = Number(document.getElementById("service").value);
-    console.log("service set to: "+serv.toString(16));
+    serv = document.getElementById("service").value;
+    console.log("service set to: "+serv);
 }
 // User input for characteristic
 function setCharacteristic(){
-    charc = Number(document.getElementById("Characteristic").value);
+    charc = document.getElementById("Characteristic").value;
     console.log("characteristic set to: "+charc.toString(16));
 }
 
