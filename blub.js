@@ -13,7 +13,7 @@ function connect(){
     })
     .then(server => {
         console.log("Getting Service 0x932c32BD-0007-47A2-835A-A8D455B859DD");
-        return ServiceUIFrameContext.getCharacteristic(0x932c32BD);
+        // return ServiceUIFrameContext.getCharacteristic(0x932c32BD);
     })
     .then(characteristic => {
         console.log("All ready");
