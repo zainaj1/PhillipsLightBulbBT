@@ -14,7 +14,7 @@ function connect(){
         return device.gatt.connect();
     })
     .then(server => {
-        var serviceCode = prompt("Enter the serivce you would like to connet too: ");
+        var serviceCode = parseInt(prompt("Enter the serivce you would like to connet too: "), 16);
         
         if(serviceCode == null){
             serviceCode = 0xFE0F;
@@ -24,7 +24,7 @@ function connect(){
         return server.getPrimaryService(serviceCode);
     })
     .then(service => {
-        var characteristicCode = prompt("Enter the characteristic you would like to connect too: ");
+        var characteristicCode = parseInt(prompt("Enter the characteristic you would like to connect too: "), 16);
         
         if(characteristicCode == null){
             characteristicCode = 0x932C32BD000747A2835AA8D455B859DD;
