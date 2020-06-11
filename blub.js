@@ -4,7 +4,7 @@
 
 // Initalize variables:
 var serv = "FE0F";
-var charc = "932C32BD000747A2835AA8D455B859DD"
+var charc = "932C32BD-0007-47A2-835A-A8D455B859DD"
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
 
 
