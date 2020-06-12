@@ -1,3 +1,4 @@
+var context;
 window.onload = function() {
 
     const file = document.getElementById("file-input");
@@ -18,7 +19,7 @@ window.onload = function() {
         try
         {
             window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            var context=new AudioContext();
+            context = new AudioContext();
         }
         catch(e)
         {
@@ -72,9 +73,25 @@ window.onload = function() {
             analyser.getByteFrequencyData(dataArray); // Gets the freqyency data into the data rray
             console.log(dataArray[dataArray.length/2]);
         }
-
-      audio.play();
-    //   setInterval(renderFrame, 60);
+       
+        // src.noteOn(0);
+        audio.play();
+        setInterval(renderFrame, 60);
     };
   };
+
+  window.addEventListener('touchstart', function() {
+
+	// create empty buffer
+	var buffer = context.createBuffer(1, 1, 22050);
+	var source = context.createBufferSource();
+	source.buffer = buffer;
+
+	// connect to output (your speakers)
+	source.connect(myContext.destination);
+
+	// play the file
+	source.noteOn(0);
+
+}, false);
   
