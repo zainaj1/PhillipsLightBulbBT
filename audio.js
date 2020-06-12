@@ -10,8 +10,11 @@ window.onload = function() {
       audio.src = URL.createObjectURL(files[0]); // Creates a DOMString containing the specified File object
   
       const name = files[0];
-    //   console.log("name: " + name);
-      const context = new AudioContext(); // (Interface) Audio-processing graph
+
+      // for legacy browsers
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const context = new AudioContext();
+
       let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
       // to which can then be played and manipulated
       const analyser = context.createAnalyser(); // Create an analyser for the audio context
@@ -58,6 +61,12 @@ window.onload = function() {
         function renderFrame(){
             analyser.getByteFrequencyData(dataArray); // Gets the freqyency data into the data rray
             console.log(dataArray[dataArray.length/2]);
+            console.log(dataArray[dataArray.length/4]);
+            console.log(dataArray[dataArray.length/6]);
+            console.log(dataArray[dataArray.length/8]);
+            console.log(dataArray[dataArray.length - 10]);
+            console.log(dataArray[dataArray.length - 20]);
+            console.log("New line");
         }
 
       audio.play();
