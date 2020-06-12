@@ -38,7 +38,8 @@ window.onload = function() {
             source.connect(context.destination);
         
             // play the file
-            source.start(0)       
+            source.start(0);
+            context.resume();
         }, false);
 
         let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
