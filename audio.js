@@ -80,18 +80,26 @@ window.onload = function() {
     };
   };
 
-  window.addEventListener('touchstart', function() {
 
-	// create empty buffer
+var isUnlocked = false;
+function unlock() {
+			
+	if(isIOS || this.unlocked)
+		return;
+
+	// create empty buffer and play it
 	var buffer = context.createBuffer(1, 1, 22050);
 	var source = context.createBufferSource();
 	source.buffer = buffer;
-
-	// connect to output (your speakers)
 	source.connect(context.destination);
-
-	// play the file
 	source.noteOn(0);
 
-}, false);
+	// by checking the play state after some time, we know if we're really unlocked
+	setTimeout(function() {
+		if((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
+			isUnlocked = true;
+		}
+	}, 0);
+
+}
   
