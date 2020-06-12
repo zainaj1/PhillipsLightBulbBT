@@ -27,17 +27,17 @@ window.onload = function() {
   
   
       /////////////// ANALYSER FFTSIZE ////////////////////////
-      // analyser.fftSize = 32;
+      analyser.fftSize = 32;
       // analyser.fftSize = 64;
       // analyser.fftSize = 128;
       // analyser.fftSize = 256;
       // analyser.fftSize = 512;
-      analyser.fftSize = 1024;
+    //   analyser.fftSize = 1024;
       // analyser.fftSize = 2048;
       // analyser.fftSize = 4096;
       // analyser.fftSize = 8192;
     //   analyser.fftSize = 16384;
-      // analyser.fftSize = 32768;
+    //   analyser.fftSize = 32768;
   
       // (FFT) is an algorithm that samples a signal over a period of time
       // and divides it into its frequency components (single sinusoidal oscillations).
@@ -66,7 +66,7 @@ window.onload = function() {
         }
 
       audio.play();
-      setInterval(renderFrame, 300);
+      setInterval(renderFrame, 60);
     };
   };
   
