@@ -26,6 +26,22 @@ window.onload = function() {
             alert("Your browser doesn't support Web Audio API");
         }
 
+        // You need to unlock the context 
+        window.addEventListener('touchstart', function() {
+
+            // create empty buffer
+            var buffer = context.createBuffer(1, 1, 22050);
+            var source = context.createBufferSource();
+            source.buffer = buffer;
+        
+            // connect to output (your speakers)
+            source.connect(context.destination);
+        
+            // play the file
+            source.noteOn(0);
+        
+        }, false);
+
         let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
         // to which can then be played and manipulated
         const analyser = context.createAnalyser(); // Create an analyser for the audio context
@@ -79,27 +95,4 @@ window.onload = function() {
         setInterval(renderFrame, 60);
     };
   };
-
-
-var isUnlocked = false;
-function unlock() {
-			
-	if(isIOS || this.unlocked)
-		return;
-
-	// create empty buffer and play it
-	var buffer = context.createBuffer(1, 1, 22050);
-	var source = context.createBufferSource();
-	source.buffer = buffer;
-	source.connect(context.destination);
-	source.noteOn(0);
-
-	// by checking the play state after some time, we know if we're really unlocked
-	setTimeout(function() {
-		if((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
-			isUnlocked = true;
-		}
-	}, 0);
-
-}
   
