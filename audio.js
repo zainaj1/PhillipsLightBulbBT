@@ -15,12 +15,15 @@ window.onload = function() {
 
         // for legacy browsers
 
-        if('webkitAudioContext' in window) {
-            var context = new webkitAudioContext();
-        }else{
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            var context = new AudioContext();
-        }  
+        try
+        {
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+            var context=new AudioContext();
+        }
+        catch(e)
+        {
+            alert("Your browser doesn't support Web Audio API");
+        }
 
         let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
         // to which can then be played and manipulated
@@ -71,7 +74,7 @@ window.onload = function() {
         }
 
       audio.play();
-      setInterval(renderFrame, 60);
+    //   setInterval(renderFrame, 60);
     };
   };
   
