@@ -1,8 +1,10 @@
 window.onload = function() {
 
     const file = document.getElementById("file-input");
-    const audio = document.getElementById("audio");
-  
+    // const audio = document.etElementById("audio");
+
+    const audio = document.querySelector('audio');
+
     file.onchange = function() {
   
       const files = this.files; // FileList containing File objects selected by the user (DOM File API)
@@ -30,11 +32,11 @@ window.onload = function() {
       // analyser.fftSize = 128;
       // analyser.fftSize = 256;
       // analyser.fftSize = 512;
-      // analyser.fftSize = 1024;
+      analyser.fftSize = 1024;
       // analyser.fftSize = 2048;
       // analyser.fftSize = 4096;
       // analyser.fftSize = 8192;
-      analyser.fftSize = 16384;
+    //   analyser.fftSize = 16384;
       // analyser.fftSize = 32768;
   
       // (FFT) is an algorithm that samples a signal over a period of time
@@ -68,46 +70,3 @@ window.onload = function() {
     };
   };
   
-
-// window.onload = function(){
-//     const file = document.getElementById("file-input");
-//     const audio = document.getElementById("audio");
-
-//     file.onchange = function(){
-//         // Initalize instance of audio context
-//         const AudioContext = window.AudioContext || window.webkitAudioContext;
-//         const audioContext = new AudioContext();
-
-//         // Load sound
-//         const audioElement = document.querySelector('audio'); // Getting audio element
-//         const track = audioContext.createMediaElementSource(audioElement) // Passing audio element into context
-
-//         // Add controles
-//         const playButton = document.querySelector('button')
-//         playButton.addEventListener('click', function(){
-//             audioContext.resume().then(() => {
-//                 console.log('Playback resumed');
-//             })
-
-//             // For auto play check if the audio is suspended 
-//             if (audioContext.state === 'suspended'){
-//                 audioContext.resume();
-//             }
-
-//             // Play or pause music
-//             if(this.dataset.playing === 'false'){
-//                 audioElement.play();
-//                 this.dataset.playing = 'true';
-//             }
-//             else if (this.dataset.playing === 'true'){
-//                 audioElement.pause();
-//                 this.dataset.playing = 'false';
-//             }
-//         }, false);
-
-//         // Account for when track ends
-//         audioElement.addEventListener('ended', () => {
-//             playButton.dataset.playing = 'false';
-//         }, false);
-//     } // file on change
-// } // End window load
