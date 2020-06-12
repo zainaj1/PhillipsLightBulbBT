@@ -57,11 +57,11 @@ window.onload = function() {
 
         function renderFrame(){
             analyser.getByteFrequencyData(dataArray); // Gets the freqyency data into the data rray
-            console.log("loop");
+            console.log(dataArray[dataArray.length/2]);
         }
 
       audio.play();
-      setInterval(renderFrame, 3000);
+      setInterval(renderFrame, 300);
     };
   };
   

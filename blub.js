@@ -5,10 +5,9 @@
 // Initalize variables:
 var serv = '932c32bd-0000-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0007-47a2-835a-a8d455b859dd';
+var ledCharc;
 
 // var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
-
-
 function connect(){
     navigator.bluetooth.requestDevice({
         filters:[{services: [0xFE0F]}]
@@ -35,6 +34,7 @@ function connect(){
         
     })
     .then(characteristic => {
+        ledCharc = characteristic;
         console.log("sent command");
         var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
         return characteristic.writeValue(data);
@@ -57,8 +57,12 @@ function setCharacteristic(){
 
 // Light functions
 function turnOn(){
-    console.log("Not initalized");
+    var data = new Uint8Array([0x01, 0x01, 0x01, 0x05, 0x02, 0x02, 0x00])
+    console.log("Light turned on");
+    return ledCharc.writeValue(data)
 }
 function turnOff(){
-    console.log("Not initalized")
+    var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
+    console.log("Light turned off");
+    return ledCharc.writeValue(data)
 }
