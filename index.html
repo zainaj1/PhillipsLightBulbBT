@@ -7,6 +7,10 @@
 </head>
 <body>                                                         
     <div class="top">
+        <h1> Auido stuff</h1>
+            <input type="file" id="file-input" accept="audio/*,video/*,image/*" />
+            <audio id="audio" controls> </audio>
+
         <h1> Parameters for Bluetooth</h1>
 
         Serivce: <input type="text" id="service"> 
@@ -21,11 +25,11 @@
     </div>
     <div class="bottom">
         <h1> Functions to Control Lights</h1>
-
         <button onclick="turnon()"> On </button>
         <button onclick="turnoff()"> Off </button>
     </div>
     <script src="blub.js"></script>
+    <script src="audio.js"></script>
     
 </body>
 </html>
