@@ -38,7 +38,7 @@ window.onload = function() {
             source.connect(context.destination);
         
             // play the file
-            source.start()       
+            source.start(0)       
         }, false);
 
         let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
@@ -95,3 +95,30 @@ window.onload = function() {
     };
   };
   
+
+// const _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+// const file = document.getElementById("file-input");
+// const audio = document.etElementById("audio");
+
+// const files = this.files; // FileList containing File objects selected by the user (DOM File API)
+// console.log('FILES[0]: ', files[0])
+// audio.src = URL.createObjectURL(files[0]);
+
+//     /**
+//      * Load and play the specified file.
+//      * @param sfxFile
+//      * @returns {Promise<AudioBufferSourceNode>}
+//      */
+//     function play (sfxFile) {
+//         return load(sfxFile).then((arrayBuffer) => {
+//             const buffer = context.createBuffer(1, 1, 22050);
+//             const source = context.createBufferSource();
+
+//             source.buffer = buffer;
+//             source.connect(_audioCtx.destination);
+//             source.start();
+
+//             return source;
+//         });
+//     };
