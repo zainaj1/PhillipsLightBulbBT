@@ -81,7 +81,6 @@ window.addEventListener('touchstart', function() {
         // audio.play();
     }
     
-
     if( context.state === "running" && source != null){
         console.log("HEre");
         // Initalize nodes
@@ -100,11 +99,6 @@ window.addEventListener('touchstart', function() {
         source.connect(context.destination);
         sourceJs.connect(context.destination);
         // End destination of an audio graph in a given context
-
-        // source.start();
-        // sourceJs.start(0);
-        // analyser.start(0);
-        // audio.play();
         
         sourceJs.onaudioprocess = function(audioProcessingEvent){
             var array = new Uint8Array(analyser.frequencyBinCount);
@@ -158,22 +152,4 @@ function getData(){
             console.log("There has been an error: "+ e);
         });
     }
-    // request.send();
 }
-
-function getDataFromAudio(){
-    // Initalize context 
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
-
-    source = context.createMediaElementSource(this.audio.base); // Give the audio context an audio source,
-    // to which can then be played and manipulated
-    const analyser = context.createAnalyser(); // Create an analyser for the audio context
-    
-    source.connect(analyser); // Connects the audio context source to the analyser
-}
-
-function renderFrame(dataArray){
-        analyser.getByteFrequencyData(dataArray); // Gets the freqyency data into the data rray
-        console.log(dataArray[dataArray.length/2]);
-    }
