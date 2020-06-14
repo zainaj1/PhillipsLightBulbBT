@@ -54,6 +54,7 @@
 let context;
 let source;
 let analyser;
+var soundBuffer;
 const audio = document.querySelector('audio');
 
 
@@ -62,46 +63,56 @@ window.addEventListener('touchstart', function() {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
     getData();
+
     // play the file: This is what unlocks the context
     context.resume;
     console.log(context.state);
 
-    // Initalize nodes
-    var sourceJs = context.createScriptProcessor(2048, 1, 1);
-    analyser = context.createAnalyser(); 
-    analyser.fftSize = 32;
+    if( context.state === "running"){
+        play();
 
-    // Connect nodes
-    source.connect(analyser);
-    analyser.connect(sourceJs);
+        // Initalize nodes
+        var sourceJs = context.createScriptProcessor(2048, 1, 1);
 
-    // Connect nodes to destinations
-    source.connect(context.destination);
-    sourceJs.connect(context.destination);
-     // End destination of an audio graph in a given context
+        // Initalize analysier
+        analyser = context.createAnalyser(); 
+        analyser.smoothingTimeConstant = 0.6;
+        analyser.fftSize = 512;
 
-    sourceJs.onaudioprocess = function(e){
-        var bufferLength = analyser.frequencyBinCount;
-        var dataArray = new Uint8Array(bufferLength); // Converts to 8-bit unsigned integer array
-        console.log('DATA-ARRAY: ', dataArray) // Check out this array of frequency values!
-        renderFrames(dataArray);
-    };
-    audio.play();
+        // Connect nodes
+        source.connect(analyser);
+        analyser.connect(sourceJs);
+
+        // Connect nodes to destinations
+        source.connect(context.destination);
+        sourceJs.connect(context.destination);
+        // End destination of an audio graph in a given context
+
+        sourceJs.onaudioprocess = function(e){
+
+            var array = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(array);
+            console.log('DATA-ARRAY: ', array) // Check out this array of frequency values!
+            renderFrames(array);
+        };
+    }
+    
     // At this point dataArray is an array with length of bufferLength but no values
     // console.log('DATA-ARRAY: ', dataArray) // Check out this array of frequency values!
-    source.start(0);
-
 }, false);
 
 
 function renderFrames(dataArray){
-    for(data in dataArray){
-        console.log(data);
-    }
-
-    // console.log(dataArray[dataArray.length/2]);
+    console.log(dataArray);
 } 
 
+function play(){
+    source = context.createBufferSource();
+    source.buffer = soundBuffer;
+    source.connect(context.destination);
+
+    source.start(0);
+}
 /**
  * getData
  * Does an XML http request to fetch the required audio file
@@ -109,12 +120,8 @@ function renderFrames(dataArray){
  * Populates source with data stream from audio file
  */
 function getData(){
-    // Initalize context 
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
-
     // Initalize buffer for source
-    source = context.createBufferSource();
+    // source = context.createBufferSource();
 
     // Initalize request
     var request = new XMLHttpRequest();
@@ -126,14 +133,24 @@ function getData(){
         var data = request.response;
 
         context.decodeAudioData(data, function(buffer){
-            source.buffer = buffer;
-
-            source.connect(context.destination);
+            soubdBuffer = buffer;
         }, 
         function(e){
             console.log("There has been an error: "+ e);
         });
-    }   
+    };
+}
+
+function getDataFromAudio(){
+    // Initalize context 
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    context = new AudioContext();
+
+    source = context.createMediaElementSource(this.audio.base); // Give the audio context an audio source,
+    // to which can then be played and manipulated
+    const analyser = context.createAnalyser(); // Create an analyser for the audio context
+    
+    source.connect(analyser); // Connects the audio context source to the analyser
 }
 
 function renderFrame(dataArray){
