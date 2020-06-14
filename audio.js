@@ -4,7 +4,28 @@ window.addEventListener('touchstart',  function() {
     const file = document.getElementById("file-input");
     const audio = document.querySelector('audio');
 
+    // for legacy browsers
+    try
+    {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var context = new AudioContext();
+    }
+    catch(e)
+    {
+        alert("Your browser doesn't support Web Audio API");
+    }
+    
+    // Try to unlock the context
+    // create empty buffer
+    context.resume().then(() => {
+        console.log('Playback resumed successfully');
+    });
 
+    var buffer = context.createBuffer(1, 1, 22050);
+    var source = context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(context.destination);
+    source.start(0);
 
     file.onchange = function() {
         const files = this.files; // FileList containing File objects selected by the user (DOM File API)
@@ -12,32 +33,6 @@ window.addEventListener('touchstart',  function() {
         audio.src = URL.createObjectURL(files[0]); // Creates a DOMString containing the specified File object
         
         const name = files[0];
-
-        // for legacy browsers
-
-        try
-        {
-            window.AudioContext = window.AudioContext || window.webkitAudioContext;
-            var context = new AudioContext();
-        }
-        catch(e)
-        {
-            alert("Your browser doesn't support Web Audio API");
-        }
-
-        // Try to unlock the context
-
-        // create empty buffer
-        var buffer = context.createBuffer(1, 1, 22050);
-        var source = context.createBufferSource();
-        source.buffer = buffer;
-
-        // connect to output (your speakers)
-        source.connect(context.destination);
-
-        // play the file
-        source.start(0);
-
 
         let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
         // to which can then be played and manipulated
