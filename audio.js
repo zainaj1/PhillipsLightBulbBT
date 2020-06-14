@@ -101,7 +101,7 @@
     const _af_buffers = new Map(),
         _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let _isUnlocked = false;
-
+    _unlockAudio();
     /**
      * A shim to handle browsers which still expect the old callback-based decodeAudioData,
      * notably iOS Safari - as usual.
