@@ -53,25 +53,54 @@
 
 let context;
 let source;
+let analyser;
+const audio = document.querySelector('audio');
+
 
 window.addEventListener('touchstart', function() {
     
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
-	// create empty buffer
-	var buffer = context.createBuffer(1, 1, 22050);
-	var source = context.createBufferSource();
-	source.buffer = buffer;
-
-	// connect to output (your speakers)
-	source.connect(context.destination);
-
-    // play the file
+    getData();
+    // play the file: This is what unlocks the context
     context.resume;
-    source.start(0);
     console.log(context.state);
 
+    // Initalize nodes
+    var sourceJs = context.createScriptProcessor(2048, 1, 1);
+    analyser = context.createAnalyser(); 
+    analyser.fftSize = 32;
+
+    // Connect nodes
+    source.connect(analyser);
+    analyser.connect(sourceJs);
+
+    // Connect nodes to destinations
+    source.connect(context.destination);
+    sourceJs.connect(context.destination);
+     // End destination of an audio graph in a given context
+
+    sourceJs.onaudioprocess = function(e){
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength); // Converts to 8-bit unsigned integer array
+        console.log('DATA-ARRAY: ', dataArray) // Check out this array of frequency values!
+        renderFrames(dataArray);
+    };
+    audio.play();
+    // At this point dataArray is an array with length of bufferLength but no values
+    // console.log('DATA-ARRAY: ', dataArray) // Check out this array of frequency values!
+    source.start(0);
+
 }, false);
+
+
+function renderFrames(dataArray){
+    for(data in dataArray){
+        console.log(data);
+    }
+
+    // console.log(dataArray[dataArray.length/2]);
+} 
 
 /**
  * getData
@@ -106,6 +135,11 @@ function getData(){
         });
     }   
 }
+
+function renderFrame(dataArray){
+        analyser.getByteFrequencyData(dataArray); // Gets the freqyency data into the data rray
+        console.log(dataArray[dataArray.length/2]);
+    }
 
 function webAudioTouchUnlock (context)
 {
