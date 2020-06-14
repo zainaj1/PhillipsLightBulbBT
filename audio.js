@@ -69,14 +69,16 @@ window.addEventListener('touchstart', function() {
     console.log(context.state);
     
     if(context.state === "suspended" && source == null){
+        console.log("Populate context");
         getData();
         init();
         // play the file: This is what unlocks the context 
     }
     else if(source != null && context.state === "suspended"){
+        console.log("Set running");
         context.resume;
         source.start(0);
-        audio.play();
+        // audio.play();
     }
     
 
@@ -103,8 +105,9 @@ window.addEventListener('touchstart', function() {
         // sourceJs.start(0);
         // analyser.start(0);
         // audio.play();
-        var array = new Uint8Array(analyser.frequencyBinCount);
+        
         sourceJs.onaudioprocess = function(audioProcessingEvent){
+            var array = new Uint8Array(analyser.frequencyBinCount);
             analyser.getByteFrequencyData(array);
             // console.log('DATA-ARRAY: ', array) // Check out this array of frequency values!
             renderFrames(array);
@@ -125,8 +128,6 @@ function init(){
     source = context.createBufferSource();
     source.buffer = soundBuffer;
     source.connect(context.destination);
-
-    
 }
 
 /**
@@ -149,8 +150,9 @@ function getData(){
         var data = request.response;
 
         context.decodeAudioData(data, function(buffer){
-            console.log(data);
-            soubdBuffer = buffer;
+            
+            soundBuffer = buffer;
+            console.log(soundBuffer);
         }, 
         function(e){
             console.log("There has been an error: "+ e);
