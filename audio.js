@@ -152,4 +152,5 @@ function getData(){
             console.log("There has been an error: "+ e);
         });
     }
+    request.send();
 }
