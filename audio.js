@@ -138,6 +138,7 @@ function getData(){
     var request = new XMLHttpRequest();
     request.open('GET', 'elijah who - skateboard p.mp3', true);
     request.responseType = 'arraybuffer';
+    console.log(request.responseText);
 
     // Fetch request
     request.onload = function(){
