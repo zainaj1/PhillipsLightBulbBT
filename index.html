@@ -11,38 +11,33 @@
 
 
     <div class="top">
-        <h1> Auido stuff</h1>
-        <button onclick="">unlock</button>
-        <input type="file" id="file-input" accept="audio"/>
+        <!-- <h1> Auido stuff</h1>
         <audio id="audio" controls>
             <source src="elijah who - skateboard p.mp3"/>
-        </audio>
+        </audio> -->
 
         <h1> Parameters for Bluetooth</h1>
-        Serivce: <input type="text" id="service"> 
-        <button onclick="setService()"> set </button> <br>
-
-        Characteristic: <input type="text" id="Characteristic">
-        <button onclick="setCharacteristic()"> set </button> 
+        <button onclick="OnOff()"> on or off </button> <br>
+        <button onclick="Dim()"> Dim </button> 
     </div>
 
 
     <div class="mid">
         <h1> Start Connection</h1>
-        <button onclick="connect()"> Press to Connect </button>
+        <button disabled id="connect" onclick="connect()"> Press to Connect </button>
     </div>
 
 
     <div class="bottom">
         <h1> Functions to Control Lights</h1>
-        <button onclick="turnOn()"> On </button>
-        <button onclick="turnOff()"> Off </button>
-        <button onclick="firePlace()"> fire place </button>
+        <button disabled id="on" onclick="turnOn()"> On </button>
+        <button disabled id="off" onclick="turnOff()"> Off </button>
+        <button disabled id="fireplace" onclick="firePlace()"> fire place </button>
     </div>
 
 
     <script src="blub.js"></script>
-    <script src="audio.js"></script>
+    <!-- <script src="audio.js"></script> -->
     
 </body>
 </html>

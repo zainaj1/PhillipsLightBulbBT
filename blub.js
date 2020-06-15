@@ -6,13 +6,12 @@
 var serv = '932c32bd-0000-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0003-47a2-835a-a8d455b859dd';
 var ledCharc;
+var onOff = false;
+var connected = false;
 
-// var charc = UUID.fromString("932C32BD-0007-47A2-835A-A8D455B859DD");
 function connect(){
     navigator.bluetooth.requestDevice({
         filters:[{services: [0xFE0F]}]
-        // acceptAllDevices: true,
-        // optionalServices: [0xFE0f]
     })
     .then(device => { 
         // Get name of device
@@ -23,21 +22,25 @@ function connect(){
     })
     .then(server => {
         // Access light turning on/off service
-        console.log("Getting primary service " + serv.toString(16));
+        console.log("Getting primary service " + serv);
         return server.getPrimaryService(serv);
     })
     .then(service => {
         console.log("Acceced: "+service.uuid);
         // Get characteristic to communicate with
-        console.log("Getting characteristic " + charc.toString(16));
+        console.log("Getting characteristic " + charc);
         return service.getCharacteristic(charc);
-        
     })
     .then(characteristic => {
         ledCharc = characteristic;
         console.log("sent command");
-        // var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
+
         var data = new Uint8Array([0x12]);
+        if(onOff){
+            data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00]);
+        }
+        
+        connected = true;
         return characteristic.writeValue(data);
     })
     .catch(error => {console.log("Something whent wrong: " + error); });
@@ -45,14 +48,26 @@ function connect(){
 
 
 // User input for serivce
-function setService(){
-    serv = document.getElementById("service").value;
-    console.log("service set to: "+serv);
+function OnOff(){
+    charc = '932c32bd-0007-47a2-835a-a8d455b859dd';
+    console.log("characteristic set to: "+charc);
+    document.getElementById("connect").disabled = false;
+    document.getElementById("on").disabled = false;
+    document.getElementById("off").disabled = false;
+
+    document.getElementById("fireplace").disabled = true;
+    onOff = true;
 }
 // User input for characteristic
-function setCharacteristic(){
-    charc = document.getElementById("Characteristic").value;
-    console.log("characteristic set to: "+charc.toString(16));
+function Dim(){
+    charc = '932c32bd-0003-47a2-835a-a8d455b859dd';
+    console.log("characteristic set to: "+charc);
+    document.getElementById("connect").disabled = false;
+    document.getElementById("fireplace").disabled = false;
+
+    document.getElementById("on").disabled = true;
+    document.getElementById("off").disabled = true;
+    onOff = false;
 }
 
 
