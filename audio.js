@@ -76,6 +76,7 @@ window.addEventListener('touchstart', function() {
     }
     else if(source != null && context.state === "suspended"){
         console.log("Set running");
+        console.log("Set running");
         context.resume;
         source.start(0);
         // audio.play();
@@ -83,6 +84,7 @@ window.addEventListener('touchstart', function() {
     
     if( context.state === "running" && source != null){
         console.log("HEre");
+        console.log(source.buffer);
         // Initalize nodes
          // Initalize analysier
         analyser = context.createAnalyser(); 

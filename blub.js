@@ -70,7 +70,7 @@ function turnOff(){
 
 var fireplace = false;
 function firePlace(){
-    firelace = !firelace;
+    fireplace = !fireplace;
     
     for (i=0; i<100; i++){
         _sendCommand(i);
