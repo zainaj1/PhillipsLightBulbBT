@@ -136,7 +136,7 @@ function getData(){
 
     // Initalize request
     var request = new XMLHttpRequest();
-    request.open('GET', 'elijah who - skateboard p.mp3', true);
+    request.open('GET', 'https://github.com/zainaj1/BlueToothLE/blob/master/elijah%20who%20-%20skateboard%20p.mp3', true);
     request.responseType = 'arraybuffer';
     
 
@@ -145,16 +145,8 @@ function getData(){
         var data = request.response;
 
         context.decodeAudioData(data, function(buffer){
-            
-            if(!buffer){
-                console.log("Error decoding data")
-                return;
-            }
-            else{
-                soundBuffer = buffer;
-                console.log(soundBuffer);
-            }
-            
+            soundBuffer = buffer;
+            console.log(soundBuffer);
         }, 
         function(e){
             console.log("There has been an error: "+ e);
