@@ -91,7 +91,7 @@ window.addEventListener('touchstart', function() {
          // Initalize analysier
         analyser = context.createAnalyser(); 
         analyser.smoothingTimeConstant = 0.6;
-        analyser.fftSize = 512; 
+        analyser.fftSize = 32; 
 
         var sourceJs = context.createScriptProcessor(2048, 1, 1);
 
@@ -118,7 +118,11 @@ window.addEventListener('touchstart', function() {
 
 
 function renderFrames(dataArray){
-    console.log(dataArray[dataArray.length/2]);
+    // console.log(dataArray[dataArray.length/2]);
+    if(ledCharc){
+        var data = new Uint8Array([dataArray[dataArray.length/2]])
+        _sendCommand(data);
+    }
 } 
 
 function init(){
