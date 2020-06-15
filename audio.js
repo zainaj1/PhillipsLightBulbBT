@@ -59,10 +59,12 @@ let analyser;
 var soundBuffer;
 const audio = document.querySelector('audio');
 var loaded = false;
+var loading = false;
+
 
 
 window.addEventListener('touchstart', function() {
-    if (source == null){
+    if (source == null && !loading){
         console.log("Made new context");
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         context = new AudioContext();
@@ -135,7 +137,7 @@ function init(){
  */
 function getData(){
     // Initalize buffer for source
-
+    loading = true;
     // Initalize request
     var request = new XMLHttpRequest();
     request.open('GET', 'elijah who - skateboard p.mp3', true);
