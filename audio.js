@@ -122,7 +122,7 @@ function renderFrames(dataArray){
     for(i=0; i<dataArray.length; i++){
         sum += dataArray[i];
     }
-    var data = new Uint8Array([Math.Floor(sum/dataArray.length)]);
+    var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
     // _sendCommand(data);
         console.log(data);
 
@@ -131,7 +131,7 @@ function renderFrames(dataArray){
     //     for(i=0; i<dataArray.length; i++){
     //         sum += dataArray[i];
     //     }
-    //     var data = new Uint8Array([Math.Floor(sum/dataArray.length)]);
+    //     var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
     //     _sendCommand(data);
     //     // console.log(1);
     // }
