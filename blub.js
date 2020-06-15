@@ -56,6 +56,8 @@ function OnOff(){
     document.getElementById("off").disabled = false;
 
     document.getElementById("fireplace").disabled = true;
+
+    firePlace = false;
     onOff = true;
 }
 // User input for characteristic
@@ -67,6 +69,7 @@ function Dim(){
 
     document.getElementById("on").disabled = true;
     document.getElementById("off").disabled = true;
+    
     onOff = false;
 }
 
