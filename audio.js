@@ -126,7 +126,7 @@ function renderFrames(dataArray){
         }
         var data = new Uint8Array([sum/dataArray.length]);
         // _sendCommand(data);
-        console.log(Math.floor(sum/dataArray.length));
+        console.log(1);
     }
 } 
 
