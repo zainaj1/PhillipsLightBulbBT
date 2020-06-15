@@ -37,7 +37,7 @@ function connect(){
         ledCharc = characteristic;
         console.log("sent command");
         // var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
-        data = 120;
+        var data = new Uint8Array([0x12]);
         return characteristic.writeValue(data);
     })
     .catch(error => {console.log("Something whent wrong: " + error); });
@@ -72,9 +72,10 @@ var fireplace = false;
 function firePlace(){
     fireplace = !fireplace;
     
-    for (i=0; i<100; i++){
-        _sendCommand(i);
-        console.log(i);
+    for (i=0; i<99; i++){
+        var data = new Uint8Array([i]);
+        _sendCommand(data);
+        console.log(data);
     }
 }
 

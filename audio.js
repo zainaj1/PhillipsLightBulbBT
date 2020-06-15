@@ -58,6 +58,7 @@ let source;
 let analyser;
 var soundBuffer;
 const audio = document.querySelector('audio');
+var loaded = false;
 
 
 window.addEventListener('touchstart', function() {
@@ -68,13 +69,12 @@ window.addEventListener('touchstart', function() {
     }
     console.log(context.state);
     
-    if(context.state === "suspended" && source == null){
+    if(context.state === "suspended" && !loaded){
         console.log("Populate context");
         getData();
-        init();
         // play the file: This is what unlocks the context 
     }
-    else if(source != null && context.state === "suspended"){
+    else if(loaded && context.state === "suspended"){
         console.log("Set running");
         console.log("Set running");
         context.resume;
@@ -124,6 +124,7 @@ function init(){
     source = context.createBufferSource();
     source.buffer = soundBuffer;
     source.connect(context.destination);
+    loaded = true;
 }
 
 /**
@@ -134,13 +135,11 @@ function init(){
  */
 function getData(){
     // Initalize buffer for source
-    // source = context.createBufferSource();
 
     // Initalize request
     var request = new XMLHttpRequest();
     request.open('GET', 'elijah who - skateboard p.mp3', true);
     request.responseType = 'arraybuffer';
-    
 
     // Fetch request
     request.onload = function(){
@@ -148,6 +147,7 @@ function getData(){
 
         context.decodeAudioData(data, function(buffer){
             soundBuffer = buffer;
+            init();
             console.log(soundBuffer);
         }, 
         function(e){
