@@ -118,16 +118,23 @@ window.addEventListener('touchstart', function() {
 
 
 function renderFrames(dataArray){
-    // console.log(dataArray[dataArray.length/2]);
-    if(ledCharc){
-        var sum = 0;
-        for(i=0; i<dataArray.length; i++){
-            sum += dataArray[i];
-        }
-        var data = new Uint8Array([sum/dataArray.length]);
-        _sendCommand(data);
-        // console.log(1);
+    var sum = 0;
+    for(i=0; i<dataArray.length; i++){
+        sum += dataArray[i];
     }
+    var data = new Uint8Array([math.Floor(sum/dataArray.length)]);
+    // _sendCommand(data);
+        console.log(data);
+
+    // if(ledCharc){
+    //     var sum = 0;
+    //     for(i=0; i<dataArray.length; i++){
+    //         sum += dataArray[i];
+    //     }
+    //     var data = new Uint8Array([math.Floor(sum/dataArray.length)]);
+    //     _sendCommand(data);
+    //     // console.log(1);
+    // }
 } 
 
 function init(){
