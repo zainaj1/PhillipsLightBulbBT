@@ -73,7 +73,7 @@ function firePlace(){
     fireplace = !fireplace;
     
     for (i=0; i<99; i++){
-        var data = new Uint8Array([i]);
+        var data = new Uint8Array([Math.floor(Math.random() *99) + 1]);
         _sendCommand(data);
         console.log(data);
     }
