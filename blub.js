@@ -63,7 +63,7 @@ function turnOn(){
     return ledCharc.writeValue(data)
 }
 function turnOff(){
-    var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00])
+    var data = new Uint8Array([0x01, 0x01, 0x00, 0x05, 0x02, 0x02, 0x00]);
     console.log("Light turned off");
     return ledCharc.writeValue(data)
 }
@@ -73,7 +73,7 @@ function firePlace(){
     fireplace = !fireplace;
     
     while(firePlace){
-        var data = new Uint8Array([Math.floor(Math.random() *99) + 1]);
+        var data = new Uint8Array([Math.floor(Math.random() *254) + 1]);
         _sendCommand(data);
         // console.log(data);
     }
