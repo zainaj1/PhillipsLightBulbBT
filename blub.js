@@ -7,7 +7,7 @@ var serv = '932c32bd-0000-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0003-47a2-835a-a8d455b859dd';
 var ledCharc;
 var onOff = false;
-var connected = true; // Change to false when using in website
+var connected = false; // Change to false when using in website
 var freq = document.getElementById("myNumber").value;
 
 function connect(){
