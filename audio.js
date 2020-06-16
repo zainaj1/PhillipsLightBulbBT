@@ -15,7 +15,7 @@ window.addEventListener('touchstart', function() {
         }
         console.log(context.state);
         
-        if(context.state === "suspended" && !loaded){
+        if(context.state === "suspended" && !loading){
             console.log("Populate context");
             getData();
             // play the file: This is what unlocks the context 
@@ -34,10 +34,10 @@ window.addEventListener('touchstart', function() {
             // Initalize nodes
             // Initalize analysier
             analyser = context.createAnalyser(); 
-            // analyser.smoothingTimeConstant = 0.6;
+            analyser.smoothingTimeConstant = 0.3;
             analyser.fftSize = 32; 
 
-            var sourceJs = context.createScriptProcessor(4096, 1, 1);
+            var sourceJs = context.createScriptProcessor(8192, 1, 1);
 
             // Connect nodes
             source.connect(analyser);
