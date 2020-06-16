@@ -7,7 +7,7 @@ var serv = '932c32bd-0000-47a2-835a-a8d455b859dd';
 var charc = '932c32bd-0003-47a2-835a-a8d455b859dd';
 var ledCharc;
 var onOff = false;
-var connected = false;
+var connected = true; // Change to false when using in website
 
 function connect(){
     navigator.bluetooth.requestDevice({

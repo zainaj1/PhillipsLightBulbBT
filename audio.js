@@ -5,7 +5,7 @@ var soundBuffer;
 const audio = document.querySelector('audio');
 var loaded = false;
 var loading = false;
-
+var freq = document.getElementById("myNumber").value;
 
 window.addEventListener('touchstart', function() {
     if(connected){
@@ -64,23 +64,26 @@ window.addEventListener('touchstart', function() {
 
 
 function renderFrames(dataArray){
-    var sum = 0;
-    for(i=0; i<dataArray.length; i++){
-        sum += dataArray[i];
-    }
-    var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
-    // _sendCommand(data);
-        console.log(data);
-
-    // if(ledCharc){
-    //     var sum = 0;
-    //     for(i=0; i<dataArray.length; i++){
-    //         sum += dataArray[i];
-    //     }
-    //     var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
-    //     _sendCommand(data);
-    //     // console.log(1);
+    // var sum = 0;
+    // for(i=0; i<dataArray.length; i++){
+    //     sum += dataArray[i];
     // }
+    // var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
+    // _sendCommand(data);
+
+    if(ledCharc){
+        var sum = 0;
+        for(i=0; i<dataArray.length; i++){
+            sum += dataArray[i];
+        }
+        var data = new Uint8Array([Math.floor(sum/dataArray.length)]);
+        _sendCommand(data);
+        // console.log(1);
+    }else{
+        console.log(dataArray.length);
+        var data = new Uint8Array([dataArray[freq]]);
+        console.log(dataArray[freq]);
+    }
 } 
 
 function init(){
@@ -120,4 +123,8 @@ function getData(){
     }
     request.send();
     console.log("Request Data: " + request.response);
+
+    function changeFreq(){
+        freq = document.getElementById("myNumber").value;
+    }
 }
