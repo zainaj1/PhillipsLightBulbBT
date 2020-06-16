@@ -38,7 +38,7 @@ window.addEventListener('touchstart', function() {
             analyser.smoothingTimeConstant = 0.6;
             analyser.fftSize = 32; 
 
-            var sourceJs = context.createScriptProcessor(2048, 1, 1);
+            var sourceJs = context.createScriptProcessor(0, 1, 1);
 
             // Connect nodes
             source.connect(analyser);
@@ -80,7 +80,7 @@ function renderFrames(dataArray){
         _sendCommand(data);
         // console.log(1);
     }else{
-        console.log(dataArray.length);
+        // console.log(dataArray.length);
         var data = new Uint8Array([dataArray[freq]]);
         console.log(dataArray[freq]);
     }
