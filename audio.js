@@ -35,7 +35,7 @@ window.addEventListener('touchstart', function() {
             // Initalize nodes
             // Initalize analysier
             analyser = context.createAnalyser(); 
-            analyser.smoothingTimeConstant = 0.6;
+            // analyser.smoothingTimeConstant = 0.6;
             analyser.fftSize = 32; 
 
             var sourceJs = context.createScriptProcessor(0, 1, 1);
