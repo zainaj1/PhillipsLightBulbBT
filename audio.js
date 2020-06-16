@@ -5,7 +5,6 @@ var soundBuffer;
 const audio = document.querySelector('audio');
 var loaded = false;
 var loading = false;
-var freq = document.getElementById("myNumber").value;
 
 window.addEventListener('touchstart', function() {
     if(connected){
@@ -129,8 +128,5 @@ function getData(){
     request.send();
     console.log("Request Data: " + request.response);
 
-    function changeFreq(){
-        freq = document.getElementById("myNumber").value;
-        console.log("frequency changed to: "+freq);
-    }
+    
 }

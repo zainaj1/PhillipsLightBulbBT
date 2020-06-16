@@ -8,6 +8,7 @@ var charc = '932c32bd-0003-47a2-835a-a8d455b859dd';
 var ledCharc;
 var onOff = false;
 var connected = true; // Change to false when using in website
+var freq = document.getElementById("myNumber").value;
 
 function connect(){
     navigator.bluetooth.requestDevice({
@@ -95,6 +96,11 @@ function firePlace(){
         _sendCommand(data);
         // console.log(data);
     }
+}
+
+function changeFreq(){
+    freq = document.getElementById("myNumber").value;
+    console.log("frequency changed to: "+freq);
 }
 
 function _sendCommand(i){
