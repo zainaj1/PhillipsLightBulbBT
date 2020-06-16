@@ -126,5 +126,6 @@ function getData(){
 
     function changeFreq(){
         freq = document.getElementById("myNumber").value;
+        console.log("frequency changed to: "+freq);
     }
 }
