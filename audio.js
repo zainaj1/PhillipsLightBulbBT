@@ -117,7 +117,7 @@ function getData(){
     loading = true;
     // Initalize request
     var request = new XMLHttpRequest();
-    request.open('GET', 'elijah who - skateboard p.mp3', true);
+    request.open('GET', 'RobotVoice.mp3', true);
     request.responseType = 'arraybuffer';
 
     // Fetch request
